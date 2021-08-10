@@ -5,6 +5,4 @@ from django.http import HttpResponse
 # Create your views here.
 class AccountsView(View):
     def get(self, request):
-        response = HttpResponse()
-        response.content = "Monke gaming"
-        return response
+        return render(request, 'accounts/index.html')
