@@ -1,0 +1,29 @@
+.products {
+  background: #bebebe;
+  padding: 1em 7em 7em 12em;
+  height: 100vh;
+}
+
+.products .product {
+  background: #e7e7e7;
+  margin-top: 5em;
+  border-radius: 2em;
+  padding: 1.5em;
+}
+
+.products .product h2 {
+  margin: 0 0 0.2em 0;
+}
+
+.products .product h2:hover {
+  cursor: pointer;
+}
+
+.products .product h3 {
+  margin: 0 0 1.2em 0;
+}
+
+.products .product p {
+  white-space: pre-wrap;
+}
+/*# sourceMappingURL=main.css.map */

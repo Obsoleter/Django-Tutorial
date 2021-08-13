@@ -1,0 +1,61 @@
+//Global
+body {
+    background: #bebebe;
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+a {
+    text-decoration: none;
+}
+
+
+//Navbar
+.navbar {
+    background: #d4d4d4;
+
+    .container {
+        display: flex;
+    }
+
+    .logo {
+        background: #c8c8c8;
+        height: 100%;
+        padding: 1em;
+        color: black;
+        font-weight: bold;
+
+        span {
+            color: blue;
+        }
+    }
+
+    nav {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        ul {
+            margin: 0;
+            padding: 0 1em;
+            display: flex;
+            list-style: none;
+
+            li {
+                margin: 0;
+                padding: 0 .3em;
+
+                a {
+                    color: black;
+                }
+
+                &:hover {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

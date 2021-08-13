@@ -1,0 +1,74 @@
+.product-head {
+  margin-top: 5em;
+  margin-bottom: 1em;
+}
+
+.product-head .container {
+  border-radius: 2em;
+}
+
+.product-head h2 {
+  margin: 0 0 0.2em 0;
+  color: blue;
+}
+
+.product-head h2:hover {
+  cursor: pointer;
+}
+
+.product-head h3 {
+  margin: 0;
+}
+
+.product-desc {
+  margin-bottom: 2em;
+}
+
+.product-desc p {
+  white-space: pre-wrap;
+}
+
+.product-block {
+  padding: 0em 7em 0em 12em;
+}
+
+.product-block .container {
+  padding: 1.5em;
+  background: #e7e7e7;
+}
+
+.comments {
+  margin-top: 10em;
+  padding: 0em 7em 5em 12em;
+}
+
+.comments .container {
+  padding: 0em;
+}
+
+.comments .comments-head {
+  padding: 1em;
+  background: #e7e7e7;
+  border-radius: 2em;
+  margin-bottom: 3em;
+}
+
+.comments .comments-head h2 {
+  text-align: center;
+  margin: 0;
+}
+
+.comments .comments-desc {
+  margin: 1.5em 0;
+  padding: 1em;
+  background: #e7e7e7;
+}
+
+.comments .comments-desc h3 {
+  margin: 0 0 1.2em 0;
+}
+
+.comments .comments-desc p {
+  white-space: pre-wrap;
+}
+/*# sourceMappingURL=products.css.map */

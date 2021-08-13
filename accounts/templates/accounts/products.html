@@ -1,0 +1,41 @@
+{% load static %}
+
+{% include 'accounts/base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/products.css' %}">
+    <title>{{product.name}}</title>
+{% endblock %}
+    <div class="product-block product-head">
+        <div class="container">
+            <h2>{{product.name}}</h2>
+            <h3>Author: {{product.author.nickname}}</h3>
+        </div>
+    </div>
+
+    <div class="product-block product-desc">
+        <div class="container">
+            <div class="description">
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="comments">
+        <div class="container">
+            <div class="comments-head">
+                <h2>Comments</h2>
+            </div>
+
+            {% for comment in comments %}
+                <div class="comments-desc">
+                    <h3>{{comment.account.nickname}}</h3>
+                    <p>{{comment.comment}}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% block body %}
+    
+{% endblock %}

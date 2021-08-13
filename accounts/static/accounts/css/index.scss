@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+
+//Mobile view
 :root {
     --primary-color: #007AF3;
 }
@@ -233,6 +235,8 @@ nav {
     cursor: pointer;
 }
 
+
+//768px view
 @media only screen and (min-width: 768px) {
     
     .mobile-menu, .mobile-menu-exit {
@@ -287,6 +291,8 @@ nav {
 
 }
 
+
+//1080px view
 @media only screen and (min-width: 1080px) {
     .container {
         width: 1080px;
@@ -380,6 +386,8 @@ nav {
     }
 }
 
+
+//1450px view
 @media only screen and (min-width: 1450px) {
     .features-section {
 
