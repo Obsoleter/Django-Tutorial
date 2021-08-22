@@ -5,7 +5,7 @@
     height: 100vh;
 
     .container {
-        //margin: 2em;
+        padding-bottom: 5em;
     }
 
     .product {
@@ -29,5 +29,14 @@
         p {
             white-space: pre-wrap;
         }
+    }
+
+    .add {
+        margin-top: 5rem;
+        color: blue;
+        cursor: pointer;
+        font-size: 2em;
+        text-align: center;
+        font-weight: bolder;
     }
 }

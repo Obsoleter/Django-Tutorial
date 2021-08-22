@@ -12,18 +12,27 @@
 <body>
     <div class="navbar">
         <div class="container">
-            <a class="logo" href="#">Remember<span>That</span></a>
+            <a class="logo" href="{% url 'main' %}">Remember<span>That</span></a>
 
             <nav>
                 <ul class="primary-nav">
                     <li><a href="{% url 'main' %}">Home</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Pricing</a></li>
                 </ul>
 
                 <ul class="secondary-nav">
-                    <li><a href="#">Contact</a></li>
-                    <li class="go-premium"><a href="#">Go Premium</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'login' %}">Log in</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                {% else %}
+                    <li><a href="{% url 'profile' %}">{{user.username}}</a></li>
+                    <li>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="logout" value="1">
+                            <input type="submit" value="Log out">
+                        </form>
+                    </li>
+                {% endif %}
                 </ul>
             </nav>
         </div>

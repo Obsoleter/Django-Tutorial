@@ -8,8 +8,20 @@
 {% endblock %}
     <div class="product-block product-head">
         <div class="container">
-            <h2>{{product.name}}</h2>
-            <h3>Author: {{product.author.nickname}}</h3>
+            <div class="product_info">
+                <h2>{{product.name}}</h2>
+                <h3>Author: {{product.author.user.username}}</h3>
+            </div>
+            {% if product.author.id == user.account.id %}
+            <div class="product-control">
+                <form class="delete" action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="delete_product", value="{{product.id}}">
+                    <input type="submit" value="Delete">
+                </form>
+                <a href="{% url 'update_product' product.id %}" class="update">Update</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 
@@ -29,11 +41,28 @@
 
             {% for comment in comments %}
                 <div class="comments-desc">
-                    <h3>{{comment.account.nickname}}</h3>
-                    <p>{{comment.comment}}</p>
+                    <div class="desc-info">
+                        <h3>{{comment.account.user.username}}</h3>
+                        <p>{{comment.comment}}</p>
+                    </div>
+                    {% if comment.account.id == user.account.id %}
+                    <div class="desc-control">
+                        <form class="delete" action="" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete_comment", value="{{comment.id}}">
+                            <input type="submit" value="Delete">
+                        </form>
+                        <a href="{% url 'update_product_comment' product.id comment.id %}" class="update">Update</a>
+                    </div>
+                    {% endif %}
                 </div>
             {% endfor %}
-
+            
+            <form class="comment" action="" method="POST">
+                {% csrf_token %}
+                {{comment_form}}
+                <input type="submit" value="Comment">
+            </form>
         </div>
     </div>
 {% block body %}

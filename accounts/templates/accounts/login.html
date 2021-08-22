@@ -1,0 +1,22 @@
+{% load static %}
+
+{% include 'accounts/base.html' %}
+
+
+{% block header %}
+    <title>Login</title>
+{% endblock %}
+
+{% block body %}
+    <div class="login center-block">
+        <div class="container">
+            <form action="" method="post">
+                {% csrf_token %}
+
+                <input type="text" name="username">
+                <input type="password" name="password">
+                <input type="submit" value="Log in">
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load static %}
+
+{% include 'accounts/base.html' %}
+
+
+{% block header %}
+    <title>Update comment</title>
+{% endblock %}
+
+{% block body %}
+    <style>
+        label {
+            display: none;
+        }
+    </style>
+
+    <div class="login center-block">
+        <div class="container">
+            <form action="" method="post">
+                {% csrf_token %}
+
+                {{comment_form}}
+                <input type="submit" value="Apply">
+            </form>
+        </div>
+    </div>
+{% endblock %}

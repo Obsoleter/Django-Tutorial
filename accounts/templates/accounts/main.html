@@ -15,12 +15,16 @@
             {% for product in products %}
             <div class="product">
                 <h2><a href="{% url 'products' product.id %}">{{product.name}}</a></h2>
-                <h3>Author: {{product.author.nickname}}</h3>
+                <h3>Author: {{product.author.user.username}}</h3>
                 <div class="description">
                     <p>{{product.description}}</p>
                 </div>
             </div>
             {% endfor %}
+
+            <div class="product add">
+                <a href="{% url 'add_product' %}">+</a>
+            </div>
 
         </div>
     </section>

@@ -8,6 +8,23 @@ a {
   text-decoration: none;
 }
 
+form {
+  padding: 1.5em;
+  border-radius: 2em;
+  background: #d4d4d4;
+  width: 25%;
+  justify-items: center;
+}
+
+form input[type="text"], form [type="password"], form [type="submit"] {
+  display: block;
+  margin: .2em auto;
+}
+
+.center-block form {
+  margin: 30vh auto 30vh auto;
+}
+
 .navbar {
   background: #d4d4d4;
 }
@@ -64,6 +81,26 @@ a {
 }
 
 .navbar nav ul li:hover {
+  font-weight: bold;
+}
+
+.navbar nav ul li form {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar nav ul li form input {
+  background: unset;
+  border: unset;
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-size: unset;
+  font-family: unset;
+  font-weight: unset;
+}
+
+.navbar nav ul li form input:hover {
   font-weight: bold;
 }
 /*# sourceMappingURL=base.css.map */

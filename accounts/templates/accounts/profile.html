@@ -1,0 +1,32 @@
+{% load static %}
+
+{% include 'accounts/base.html' %}
+
+
+{% block header %}
+    <title>{{user.name}}</title>
+{% endblock %}
+
+{% block body %}
+    <style>
+        label {
+            display: none;
+        }
+    </style>
+
+    <div class="profile center-block">
+        <div class="container">
+            <form action="" method="post", enctype="multipart/form-data">
+                {% if user.account.profile_picture != None %}
+                <img src="{{user.account.profile_picture.url}}" alt="Profile picture">
+                {% endif %}
+
+                {% csrf_token %}
+
+                {{user_form}}
+                {{profile_form}}
+                <input type="submit" value="Apply">
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load static %}
+
+{% include 'accounts/base.html' %}
+
+
+{% block header %}
+    <title>Update product</title>
+{% endblock %}
+
+{% block body %}
+    <style>
+        label {
+            display: none;
+        }
+    </style>
+
+    <div class="product center-block">
+        <div class="container">
+            <form action="" method="post">
+                {% csrf_token %}
+
+                {{product_form}}
+                <input type="submit" value="Apply">
+            </form>
+        </div>
+    </div>
+{% endblock %}
