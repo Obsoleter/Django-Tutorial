@@ -17,7 +17,7 @@
     <div class="profile center-block">
         <div class="container">
             <form action="" method="post", enctype="multipart/form-data">
-                {% if user.account.profile_picture != None %}
+                {% if user.account.profile_picture %}
                 <img src="{{user.account.profile_picture.url}}" alt="Profile picture">
                 {% endif %}
 
