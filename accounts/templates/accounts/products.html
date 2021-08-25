@@ -6,12 +6,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/products.css' %}">
     <title>{{product.name}}</title>
 {% endblock %}
+{% block body %}
     <div class="product-block product-head">
         <div class="container">
             <div class="product_info">
-                <h2>{{product.name}}</h2>
-                <h3>Author: {{product.author.user.username}}</h3>
+                <h2 id="product_name"></h2>
+                <h3 id="product_author">Author: </h3>
             </div>
+
+            <!--
             {% if product.author.id == user.account.id %}
             <div class="product-control">
                 <form class="delete" action="" method="POST">
@@ -22,13 +25,14 @@
                 <a href="{% url 'update_product' product.id %}" class="update">Update</a>
             </div>
             {% endif %}
+            -->
         </div>
     </div>
 
     <div class="product-block product-desc">
         <div class="container">
             <div class="description">
-                <p>{{product.description}}</p>
+                <p id="product_description"></p>
             </div>
         </div>
     </div>
@@ -38,7 +42,7 @@
             <div class="comments-head">
                 <h2>Comments</h2>
             </div>
-
+            <!--
             {% for comment in comments %}
                 <div class="comments-desc">
                     <div class="desc-info">
@@ -57,14 +61,34 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            
-            <form class="comment" action="" method="POST">
+            -->
+
+            <script type="text/html" id="comment_template">
+                <div class="comments-desc" id="comment{comment_id}">
+                    <div class="desc-info">
+                        <h3>{comment_username}</h3>
+                        <p>{comment_desc}</p>
+                    </div>
+                </div>
+            </script>
+
+            <script type="text/html" id="comment_control_template">
+                <div class="desc-control">
+                    <form class="delete">
+                        <input type="button" value="Delete" onclick="deleteComment({comment_id})">
+                    </form>
+                    <a href="update/{comment_id}" class="update">Update</a>
+                </div>
+            </script>
+
+            <form class="comment" id="insert_comments">
                 {% csrf_token %}
                 {{comment_form}}
-                <input type="submit" value="Comment">
+                <input type="button" value="Comment" onclick="createComment1()">
             </form>
         </div>
     </div>
-{% block body %}
-    
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'accounts/js/products.js' %}"></script>
 {% endblock %}

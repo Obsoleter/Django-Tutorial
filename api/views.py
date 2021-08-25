@@ -1,9 +1,11 @@
+import re
 from django.http import Http404
 
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework.parsers import JSONParser
+from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import mixins
@@ -44,7 +46,14 @@ class ProducViewSet(viewsets.ModelViewSet):
 class AccountViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
-    filterset_fields = '__all__'
+    permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ['id', 'user']
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset()).get(id=request.user.account.id)
+
+        serializer = self.get_serializer(queryset)
+        return Response(serializer.data)
 
 
 # Comment

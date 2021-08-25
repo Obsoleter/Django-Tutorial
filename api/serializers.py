@@ -11,7 +11,7 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
-    #author = serializers.ReadOnlyField(source='author.user.username')
+    author = serializers.ReadOnlyField(source='author.user.username')
 
     class Meta:
         model = Product
@@ -19,7 +19,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
-    #account = serializers.ReadOnlyField(source='account.user.username')
+    account = serializers.ReadOnlyField(source='account.user.username')
     #product = serializers.ReadOnlyField(source='product.name')
 
     class Meta:
