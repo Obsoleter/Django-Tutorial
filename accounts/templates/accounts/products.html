@@ -8,24 +8,11 @@
 {% endblock %}
 {% block body %}
     <div class="product-block product-head">
-        <div class="container">
+        <div class="container" id="product{{product.id}}">
             <div class="product_info">
                 <h2 id="product_name"></h2>
                 <h3 id="product_author">Author: </h3>
             </div>
-
-            <!--
-            {% if product.author.id == user.account.id %}
-            <div class="product-control">
-                <form class="delete" action="" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="delete_product", value="{{product.id}}">
-                    <input type="submit" value="Delete">
-                </form>
-                <a href="{% url 'update_product' product.id %}" class="update">Update</a>
-            </div>
-            {% endif %}
-            -->
         </div>
     </div>
 
@@ -42,49 +29,48 @@
             <div class="comments-head">
                 <h2>Comments</h2>
             </div>
-            <!--
-            {% for comment in comments %}
-                <div class="comments-desc">
-                    <div class="desc-info">
-                        <h3>{{comment.account.user.username}}</h3>
-                        <p>{{comment.comment}}</p>
-                    </div>
-                    {% if comment.account.id == user.account.id %}
-                    <div class="desc-control">
-                        <form class="delete" action="" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="delete_comment", value="{{comment.id}}">
-                            <input type="submit" value="Delete">
-                        </form>
-                        <a href="{% url 'update_product_comment' product.id comment.id %}" class="update">Update</a>
-                    </div>
-                    {% endif %}
+
+            <script type="text/html" id="product_control_template">
+                <div class="product-control">
+                    <form class="delete" id="test">
+                        <input type="hidden" value="{% url 'main' %}" id="product_delete_redirect">
+                        <input type="button" value="Delete" onclick="product.delete()">
+                    </form>
+                    <a href="{% url 'update_product' product.id %}" class="update">Update</a>
                 </div>
-            {% endfor %}
-            -->
+            </script>
 
             <script type="text/html" id="comment_template">
                 <div class="comments-desc" id="comment{comment_id}">
                     <div class="desc-info">
                         <h3>{comment_username}</h3>
-                        <p>{comment_desc}</p>
+                        <textarea name="" id="comment_text{comment_id}" cols="50" rows="5"></textarea>
+                        <p id="comment_desc{comment_id}">{comment_desc}</p>
                     </div>
                 </div>
             </script>
 
             <script type="text/html" id="comment_control_template">
                 <div class="desc-control">
-                    <form class="delete">
-                        <input type="button" value="Delete" onclick="deleteComment({comment_id})">
+                    <form class="delete" id="comment_delete{comment_id}">
+                        <input type="button" value="Delete" onclick="comments.delete({comment_id})">
                     </form>
-                    <a href="update/{comment_id}" class="update">Update</a>
+                    <form class="update" id="comment_update{comment_id}">
+                        <input type="button" value="Update" onclick="comments.edit({comment_id})">
+                    </form>
+                    <form class="cancel" id="comment_cancel{comment_id}">
+                        <input type="button" value="Cancel" onclick="comments.cancelEdit({comment_id})">
+                    </form>
+                    <form class="apply" id="comment_apply{comment_id}">
+                        <input type="button" value="Apply" onclick="comments.update({comment_id})">
+                    </form>
                 </div>
             </script>
 
             <form class="comment" id="insert_comments">
                 {% csrf_token %}
                 {{comment_form}}
-                <input type="button" value="Comment" onclick="createComment1()">
+                <input type="button" value="Comment" onclick="comments.create()">
             </form>
         </div>
     </div>
