@@ -21,7 +21,7 @@ function getCookie(name) {
 class User {
     constructor() { }
 
-    async fetch(user) {
+    async fetch() {
         let user = await fetch('http://localhost/api/accounts/')
         .then(response => {
             if (!response.ok) {
@@ -53,7 +53,7 @@ class Product {
         let product = await fetch('http://localhost/api/products/' + this.productId + '/')
         .then(response => {
             if (!response.ok) {
-                throw Error('Couldn\'t fetch comments!')
+                throw Error('Couldn\'t fetch product!')
             }
             return response.json()
         })
@@ -118,11 +118,11 @@ class Comments {
         this.productId = productId
     }
 
-    async fetch() {
-        const json = await fetch('http://localhost/api/comments/?product=' + this.productId)
+    async fetch(page) {
+        const json = await fetch('http://localhost/api/comments/?product=' + this.productId + '&page=' + page)
         .then(response => {
             if (!response.ok) {
-                throw Error('Couldn\'t fetch product!')
+                throw Error('Couldn\'t fetch comments!')
             }
             return response.json()
         })
@@ -130,7 +130,10 @@ class Comments {
             console.log(error)
         })
 
+        this.page = page
+        this.reloadPages(json.count)
         this.comments = json.results
+
         for (const comment of this.comments) {
             this.insertComment(comment)
         }
@@ -177,6 +180,8 @@ class Comments {
                 throw Error(`Couldn\'t delete comment with id: ${commentId}\n` + response.statusText)
             }
             document.querySelector('#comment' + commentId).remove()
+            const commentIndex = this.findComment(commentId)
+            this.comments.splice(commentIndex, 1)
         })
     }
 
@@ -211,6 +216,7 @@ class Comments {
         })
         .then(json => {
             this.insertComment(json)
+            this.comments.push(json)
             document.querySelector('#id_comment').value = ''
         })
         .catch(error => {
@@ -271,7 +277,7 @@ class Comments {
         })
         .then(response => {
             if (!response.ok) {
-                throw Error('Couldn\'t POST comment!\n' + response.statusText)
+                throw Error(`Couldn\'t PUT comment with id: ${commentId}\n` + response.statusText)
             }
             return response.json()
         })
@@ -290,13 +296,43 @@ class Comments {
     findComment(commentId) {
         let index = 0
 
-        for (let comment of this.comments) {
+        for (const comment of this.comments) {
             if (comment.id == commentId) {
                 return index
             }
             index += 1
         }
         return undefined
+    }
+
+    reloadPages(count) {
+        let pages = Math.ceil(count / 10)
+        let container = document.getElementById('insert_comments')
+        let template = '<button onclick="{click}">{value}</button>'
+        
+        container.innerHTML = ''
+
+        for (let i = 1; i <= pages; i++) {
+            let value = i
+
+            if (this.page == i) {
+                value = i.toString().bold()
+            }
+
+            let insert = template
+                .replace('{value}', value)
+                .replace('{click}', `comments.goToPage(${i})`)
+
+            container.insertAdjacentHTML('beforeend', insert)
+        }
+    }
+
+    goToPage(page) {
+        for (let comment of this.comments) {
+            document.getElementById('comment' + comment.id).remove()
+        }
+
+        this.fetch(page)
     }
 }
 
@@ -310,7 +346,7 @@ async function loadPage() {
 
     product.fetch()
 
-    comments.fetch()
+    comments.fetch(1)
 }
 
 loadPage()

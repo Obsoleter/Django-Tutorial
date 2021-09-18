@@ -198,4 +198,18 @@
             cursor: pointer;
         }
     }
+
+    .pages {
+        text-align: center;
+
+        button {
+            background: unset;
+            border: unset;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: .5em;
+            padding: 0;
+            font-weight: unset;
+        }
+    }
 }

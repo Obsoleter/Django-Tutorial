@@ -67,7 +67,9 @@
                 </div>
             </script>
 
-            <form class="comment" id="insert_comments">
+            <div class="pages" id="insert_comments"></div>
+
+            <form class="comment">
                 {% csrf_token %}
                 {{comment_form}}
                 <input type="button" value="Comment" onclick="comments.create()">
